@@ -1,11 +1,12 @@
 
 import './App.css';
-import StudentMoneyDetails from './Pages/StudentMoneyDetails/StudentMoneyDetails';
+import { RouterProvider } from 'react-router-dom';
+import router from './Router/Routes/Routes';
 
 function App() {
   return (
     <div className="">
-      <StudentMoneyDetails></StudentMoneyDetails>
+      
     </div>
   );
 }
