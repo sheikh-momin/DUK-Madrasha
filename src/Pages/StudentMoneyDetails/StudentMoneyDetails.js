@@ -2,8 +2,8 @@ import React from 'react';
 
 const StudentMoneyDetails = () => {
   return (
-    <div className='md:mx-40 mx-5'>
-      <div className='flex justify-center'>
+    <div className='md:mx-40 mx-5 '>
+      <div className='flex justify-center '>
         <div className='mr-5 md:mx-20'>
           
         <input type="text" placeholder="নাম" className="input w-full max-w-xs" /></div>
@@ -27,7 +27,7 @@ const StudentMoneyDetails = () => {
       </div>
 
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto md:mx-20 mx-10">
         <table className="table w-full">
           {/* head*/}
           <thead>

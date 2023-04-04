@@ -10,7 +10,7 @@ const MainDashboard = () => {
       <PrivateNavbar></PrivateNavbar>
       <div className='flex'>
         <div className=''><Drawer></Drawer></div>
-        <div className=''><Outlet></Outlet></div>
+        <div className='bg-slate-400 w-full'><Outlet></Outlet></div>
       </div>
       <PrivateFooter></PrivateFooter>
     </div>

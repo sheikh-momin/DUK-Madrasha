@@ -45,7 +45,7 @@ const SignUp = () => {
   };
 
   return (
-    <section className="bg-gray-50 py-20">
+    <section className="bg-gray-50 py-20 h-full">
       <div className="grid lg:grid-cols-2">
         <div className="flex justify-center  sm:mb-12">
           <Lottie animationData={animation} loop={true} />
