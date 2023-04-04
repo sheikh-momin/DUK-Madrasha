@@ -7,6 +7,8 @@ import Dashboard from "../../Pages/Dashboard/Dashboard";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import MainDashboard from "../../Layout/MainDashboard";
 import StudentMoneyDetails from "../../Pages/StudentMoneyDetails/StudentMoneyDetails";
+import StudentDocument from "../../Pages/StudentMoneyDetails/StudentDocument";
+import StudentList from "../../Pages/StudentMoneyDetails/StudentList";
 
 
 const router = createBrowserRouter([
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/studentMoneyDetails",
         element: <StudentMoneyDetails></StudentMoneyDetails>
+      },
+      {
+        path: "/dashboard/studentDocument",
+        element: <StudentDocument></StudentDocument>
+      },
+      {
+        path: "/dashboard/studentList",
+        element: <StudentList></StudentList>
       },
       {
         path: "/dashboard/signup",
