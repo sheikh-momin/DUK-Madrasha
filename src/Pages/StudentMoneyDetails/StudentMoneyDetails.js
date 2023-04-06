@@ -71,6 +71,9 @@ const StudentMoneyDetails = () => {
   }
   return (
     <div className='md:mx-40 mx-2  mt-5'>
+      <div className='bg-slate-700 text-center text-white mb-2 py-3 rounded text-2xl  '>
+        <h1>ছাত্রের বেতন</h1>
+    </div>
 
       <div className='flex justify-center mb-5'>
         <div className="md:text-lg text-sm breadcrumbs mx-auto">
@@ -111,7 +114,7 @@ const StudentMoneyDetails = () => {
               <div className='md:mr-20 mb-2 md:mb-0'>
                 <input {...register("fatherName")} type="text" placeholder="পিতার নাম" className="input md:w-full max-w-xs" /></div>
               <div className='md:mr-20 mb-2 md:mb-0'><input {...register("mobileNumber1st")} type="text" placeholder="১ম মোবাইল নাম্বার" className="input md:w-full max-w-xs" /></div>
-              <div className='mb-2 md:mb-0'><input {...register("mobileNumber2st")} type="text" placeholder="২য় মোবাইল নাম্বার" className="input md:w-full max-w-xs" /></div>
+              <div className='mb-2 md:mb-0'><input {...register("mobileNumber2nd")} type="text" placeholder="২য় মোবাইল নাম্বার" className="input md:w-full max-w-xs" /></div>
             </div>
 
             <div className='md:flex justify-center mt-5'>

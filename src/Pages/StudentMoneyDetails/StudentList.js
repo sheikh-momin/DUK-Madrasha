@@ -9,6 +9,9 @@ const StudentList = () => {
   }
   return (
     <div className='md:mx-40 mx-5 mt-5'>
+      <div className='bg-slate-700 text-center text-white mb-2 py-3 rounded text-2xl  '>
+        <h1>ছাত্র লিস্ত</h1>
+      </div>
       <div className='flex justify-center mb-5'>
         <div className="text-lg  breadcrumbs mx-auto">
           <ul>

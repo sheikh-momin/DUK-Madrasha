@@ -1,9 +1,48 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import Loader from '../../Shared/Loader/Loader';
 
 const StudentDocument = () => {
+  const [searchBtn, setSearchBtn] = useState('')
+  const [searchText, setSearchText] = useState('')
+  const [studentDocument, setStudentDocument] = useState([])
+  const [loading, setLoading] = useState(true)
+  const {user}= useContext(AuthContext)
+  const handleSearch=(e)=>{
+    setSearchText(e.target.value);
+  }
+  const handleSearchBtn=(e)=>{
+    setSearchBtn(searchText);
+  }
+
+  
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`https://duk-madrasha-server-orcin.vercel.app/studentMoney/${searchBtn}`)
+        .then(res => res.json())
+        .then(data => {
+          setStudentDocument(data)
+          
+        })
+      setLoading(false)
+    }
+
+  },[user, searchText])
+  console.log(studentDocument);
+
+  if (loading) {
+    return <Loader></Loader>;
+  }
+
+  
+
+  
   return (
     <div className='md:mx-40 mx-2 mt-5 '>
+      <div className='bg-slate-700 text-center text-white mb-2 py-3 rounded text-2xl  '>
+        <h1>ডকুমেন্ট</h1>
+      </div>
       <div className='flex justify-center mb-5'>
         <div className="md:text-lg text-sm  breadcrumbs mx-auto">
           <ul>
@@ -34,38 +73,44 @@ const StudentDocument = () => {
         <div className='flex justify-center mb-10'>
           <div className="form-control ">
             <label className="input-group ">
-              <input type="text" placeholder="ছাত্রের রোল খুজুন" className="input input-bordered " />
-              <span><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></span>
+              <input onChange={handleSearch} type="text" placeholder="ছাত্রের রোল খুজুন" className="input input-bordered " />
+              <span onClick={handleSearchBtn}><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></span>
             </label>
           </div>
         </div>
 
         
 
-        <div className='flex justify-center'>
-          <div>
-            <div className='md:flex justify-center '>
-              <div className='md:mr-20 '>
-                <h1>নাম: </h1></div>
-              <div className='md:mr-20'><h1>শ্রেনি:</h1></div>
-              <div><h1>রোল:</h1></div>
-            </div>
+        <div>
+          {
+            studentDocument?.map((document) =>
+              <div className='flex justify-center'>
+                <div>
+                  <div className='md:flex justify-center '>
+                    <div className='md:mr-20 '>
+                      <h1>নাম: {document.name}</h1></div>
+                    <div className='md:mr-20'><h1>শ্রেনি: {document.className}</h1></div>
+                    <div><h1>রোল: {document.classRoll}</h1></div>
+                  </div>
 
-            <div className='md:flex justify-center mt-5'>
-              <div className='md:mr-20'>
-                <h1>পিতার নাম: </h1></div>
-              <div className='md:mr-20'><h1>১ম মোবাইল নাম্বার: </h1></div>
-              <div><h1>২য় মোবাইল নাম্বার: </h1></div>
-            </div>
+                  <div className='md:flex justify-center mt-5'>
+                    <div className='md:mr-20'>
+                      <h1>পিতার নাম: </h1></div>
+                    <div className='md:mr-20'><h1>১ম মোবাইল নাম্বার: {document.mobileNumber1st}</h1></div>
+                    <div><h1>২য় মোবাইল নাম্বার: {document.mobileNumber2nd}</h1></div>
+                  </div>
 
-            <div className='md:flex justify-center mt-5'>
-              <div className='md:mr-20 '>
-                <h1>বেতন: </h1></div>
-              <div className='md:mr-20 '><h1>ডে কেয়ার: </h1></div>
-              <div><h1>খানা: </h1></div>
-            </div>
-          </div>
+                  <div className='md:flex justify-center mt-5'>
+                    <div className='md:mr-20 '>
+                      <h1>বেতন: {document.beton}</h1></div>
+                    <div className='md:mr-20 '><h1>ডে কেয়ার: {document.dayCare}</h1></div>
+                    <div><h1>খানা: {document.khana}</h1></div>
+                  </div>
+                </div>
+              </div>
+          )}
         </div>
+
 
         <div className="overflow-x-auto w-72 md:w-full  mt-10">
           <table className="table w-full">
@@ -83,15 +128,19 @@ const StudentDocument = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-
-              </tr>
+              {
+                studentDocument?.map((document)=>
+                  <tr>
+                    <td>{document.name}</td>
+                    <td>{document.date}</td>
+                    <td>{document.beton}</td>
+                    <td>{document.dayCare}</td>
+                    <td>{document.khana}</td>
+                    <td>{document.bokeya}</td>
+                  </tr>
+                )
+              }
+              
             </tbody>
           </table>
         </div>
@@ -104,15 +153,18 @@ const StudentDocument = () => {
 
             <tbody>
               {/* row 1 */}
+              {
+              studentDocument?.map((document)=>
               <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                
+                <td>{document.name}</td>
+                <td>{document.date2}</td>
+                <td>{document.beton2}</td>
+                <td>{document.dayCare2}</td>
+                <td>{document.khana2}</td>
+                <td>{document.bokeya2}</td>
               </tr>
+              )
+              }
             </tbody>
           </table>
         </div>

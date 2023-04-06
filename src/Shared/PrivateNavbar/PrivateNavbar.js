@@ -17,7 +17,7 @@ const PrivateNavbar = () => {
           
         </div>
         <div className="navbar-center">
-          <Link to="/dashboard" className="btn btn-ghost normal-case md:text-2xl text-white">দারুল উলুম কুরগাঁও মাদরাসা</Link>
+          <Link to="/dashboard" className="btn btn-ghost normal-case md:text-2xl text-white italic">দারুল উলুম কুরগাঁও মাদরাসা</Link>
         </div>
         <div className="navbar-end">
           <button className="btn  btn-circle">
