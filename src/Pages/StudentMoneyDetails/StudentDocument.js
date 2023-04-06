@@ -1,39 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 import Loader from '../../Shared/Loader/Loader';
+import { useForm } from "react-hook-form";
 
 const StudentDocument = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = data => console.log(data);
   const [searchBtn, setSearchBtn] = useState('')
   const [searchText, setSearchText] = useState('')
-  const [studentDocument, setStudentDocument] = useState([])
+  // const [studentDocument, setStudentDocument] = useState([])
   const [loading, setLoading] = useState(true)
   const {user}= useContext(AuthContext)
+  
   const handleSearch=(e)=>{
-    setSearchText(e.target.value);
+    const roll = e.target.value
+    setSearchText(roll);
   }
-  const handleSearchBtn=(e)=>{
+  const handleSearchBtn=()=>{
     setSearchBtn(searchText);
   }
 
+  const { data:studentDocument=[] }= useQuery({
+    queryKey: ['studentMoney','searchBtn'],
+    queryFn: () => fetch(`https://duk-madrasha-server-orcin.vercel.app/studentMoney/${searchBtn}`)
+                    .then(res => res.json())
+  })
+
   
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`https://duk-madrasha-server-orcin.vercel.app/studentMoney/${searchBtn}`)
-        .then(res => res.json())
-        .then(data => {
-          setStudentDocument(data)
+  // useEffect(() => {
+  //   if (user?.email ){
+      
+  //       .then(data => {
+  //         setStudentDocument(data)
           
-        })
-      setLoading(false)
-    }
+  //       })
+  //     setLoading(false)
+  //   }
 
-  },[user, searchText])
+  // }, [user])
   console.log(studentDocument);
+  console.log(searchBtn);
 
-  if (loading) {
-    return <Loader></Loader>;
-  }
+  // if (loading) {
+  //   return <Loader></Loader>;
+  // }
 
   
 
@@ -83,32 +95,40 @@ const StudentDocument = () => {
 
         <div>
           {
+            studentDocument ? 
             studentDocument?.map((document) =>
-              <div className='flex justify-center'>
-                <div>
-                  <div className='md:flex justify-center '>
-                    <div className='md:mr-20 '>
-                      <h1>নাম: {document.name}</h1></div>
-                    <div className='md:mr-20'><h1>শ্রেনি: {document.className}</h1></div>
-                    <div><h1>রোল: {document.classRoll}</h1></div>
-                  </div>
+            
+            document?.classRoll === searchBtn ? 
+                <div className='flex justify-center'>
+                  <div>
+                    <div className='md:flex justify-between '>
+                      <div className='md:mr-20 '>
+                        <h1 className='text-xl'>নাম: <span className='font-bold'>{document?.name}</span></h1></div>
+                      <div className='md:mr-20'><h1 className='text-xl'>শ্রেনি: <span className='font-bold'>{document?.classNumber}</span> </h1></div>
+                      <div><h1 className='text-xl'>রোল: <span className='font-bold'>{document?.classRoll}</span> </h1></div>
+                    </div>
 
-                  <div className='md:flex justify-center mt-5'>
-                    <div className='md:mr-20'>
-                      <h1>পিতার নাম: </h1></div>
-                    <div className='md:mr-20'><h1>১ম মোবাইল নাম্বার: {document.mobileNumber1st}</h1></div>
-                    <div><h1>২য় মোবাইল নাম্বার: {document.mobileNumber2nd}</h1></div>
-                  </div>
+                    <div className='md:flex justify-between mt-5'>
+                      <div className='md:mr-20'>
+                        <h1 className='text-xl'>পিতার নাম: <span className='font-bold'>{document?.fatherName}</span> </h1></div>
+                      <div className='md:mr-20'><h1 className='text-xl'>১ম মোবাইল: <span className='font-bold'>{document?.mobileNumber1st}</span> </h1></div>
+                      <div><h1 className='text-xl'>২য় মোবাইল: <span className='font-bold'>{document?.mobileNumber2nd}</span> </h1></div>
+                    </div>
 
-                  <div className='md:flex justify-center mt-5'>
-                    <div className='md:mr-20 '>
-                      <h1>বেতন: {document.beton}</h1></div>
-                    <div className='md:mr-20 '><h1>ডে কেয়ার: {document.dayCare}</h1></div>
-                    <div><h1>খানা: {document.khana}</h1></div>
+                    <div className='md:flex justify-between mt-5'>
+                      <div className='md:mr-20 '>
+                        <h1 className='text-xl'>বেতন: <span className='font-bold'>{document?.beton}</span> </h1></div>
+                      <div className='md:mr-20 '><h1 className='text-xl'>ডে কেয়ার: <span className='font-bold'>{document?.dayCare}</span> </h1></div>
+                      <div><h1 className='text-xl'>খানা: <span className='font-bold'>{document?.khana}</span> </h1></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-          )}
+            :
+            <></>
+          )
+          :
+          <></>
+          }
         </div>
 
 
@@ -128,17 +148,24 @@ const StudentDocument = () => {
             </thead>
             <tbody>
               {/* row 1 */}
+
               {
+                studentDocument ? 
                 studentDocument?.map((document)=>
+                  document?.classRoll === searchBtn ? 
                   <tr>
-                    <td>{document.name}</td>
-                    <td>{document.date}</td>
-                    <td>{document.beton}</td>
-                    <td>{document.dayCare}</td>
-                    <td>{document.khana}</td>
-                    <td>{document.bokeya}</td>
-                  </tr>
+                    <td>{document?.name}</td>
+                    <td>{document?.date}</td>
+                    <td>{document?.beton2}</td>
+                    <td>{document?.dayCare2}</td>
+                    <td>{document?.khana2}</td>
+                    <td>{document?.bokeya}</td>
+                  </tr> 
+                  :
+                  <></>
                 )
+                :
+                <></>
               }
               
             </tbody>
@@ -154,17 +181,24 @@ const StudentDocument = () => {
             <tbody>
               {/* row 1 */}
               {
-              studentDocument?.map((document)=>
-              <tr>
-                <td>{document.name}</td>
-                <td>{document.date2}</td>
-                <td>{document.beton2}</td>
-                <td>{document.dayCare2}</td>
-                <td>{document.khana2}</td>
-                <td>{document.bokeya2}</td>
-              </tr>
-              )
+              studentDocument ? 
+                studentDocument?.map((document) =>
+                  document?.classRoll === searchBtn ?
+                    <tr>
+                      <td>{document?.name}</td>
+                      <td>{document?.date2}</td>
+                      <td>{document?.beton3}</td>
+                      <td>{document?.dayCare3}</td>
+                      <td>{document?.khana3}</td>
+                      <td>{document?.bokeya2}</td>
+                    </tr>
+                    :
+                    <></>
+                )
+                :
+                <></>
               }
+              
             </tbody>
           </table>
         </div>

@@ -32,11 +32,11 @@ const Drawer = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div>
-      <section className="flex gap-6">
+    <div className="bg-[#0e0e0e]">
+      <section className="flex gap-6 ">
         <div
           className={`bg-[#0e0e0e] min-h-screen ${open ? "w-72" : "w-16"
-            } duration-500 text-gray-100 px-4`}
+            } duration-500 text-gray-100 px-4 `}
         >
           <div className="py-3 flex justify-end">
             <HiMenuAlt3
