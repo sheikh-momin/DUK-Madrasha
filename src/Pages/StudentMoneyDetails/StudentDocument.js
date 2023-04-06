@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const StudentDocument = () => {
   return (
-    <div className='md:mx-40 mx-5 mt-5 '>
+    <div className='md:mx-40 mx-2 mt-5 '>
       <div className='flex justify-center mb-5'>
-        <div className="md:text-lg sm:text-sm  breadcrumbs mx-auto">
+        <div className="md:text-lg text-sm  breadcrumbs mx-auto">
           <ul>
             <li>
               <Link to="/dashboard/studentMoneyDetails">
@@ -30,9 +30,9 @@ const StudentDocument = () => {
       </div>
       
 
-      <div className='bg-sky-200 rounded py-10'>
+      <div className='bg-sky-200 rounded py-10 md:px-5'>
         <div className='flex justify-center mb-10'>
-          <div className="form-control">
+          <div className="form-control ">
             <label className="input-group ">
               <input type="text" placeholder="ছাত্রের রোল খুজুন" className="input input-bordered " />
               <span><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg></span>
@@ -42,28 +42,32 @@ const StudentDocument = () => {
 
         
 
-        <div className='md:flex justify-center '>
-          <div className='md:mr-20 '>
-            <h1>নাম: </h1></div>
-          <div className='md:mr-20'><h1>শ্রেনি:</h1></div>
-          <div><h1>রোল:</h1></div>
+        <div className='flex justify-center'>
+          <div>
+            <div className='md:flex justify-center '>
+              <div className='md:mr-20 '>
+                <h1>নাম: </h1></div>
+              <div className='md:mr-20'><h1>শ্রেনি:</h1></div>
+              <div><h1>রোল:</h1></div>
+            </div>
+
+            <div className='md:flex justify-center mt-5'>
+              <div className='md:mr-20'>
+                <h1>পিতার নাম: </h1></div>
+              <div className='md:mr-20'><h1>১ম মোবাইল নাম্বার: </h1></div>
+              <div><h1>২য় মোবাইল নাম্বার: </h1></div>
+            </div>
+
+            <div className='md:flex justify-center mt-5'>
+              <div className='md:mr-20 '>
+                <h1>বেতন: </h1></div>
+              <div className='md:mr-20 '><h1>ডে কেয়ার: </h1></div>
+              <div><h1>খানা: </h1></div>
+            </div>
+          </div>
         </div>
 
-        <div className='md:flex justify-center mt-5'>
-          <div className='md:mr-20'>
-            <h1>পিতার নাম: </h1></div>
-          <div className='md:mr-20'><h1>১ম মোবাইল নাম্বার: </h1></div>
-          <div><h1>২য় মোবাইল নাম্বার: </h1></div>
-        </div>
-
-        <div className='md:flex justify-center mt-5'>
-          <div className='md:mr-20 '>
-            <h1>বেতন: </h1></div>
-          <div className='md:mr-20 '><h1>ডে কেয়ার: </h1></div>
-          <div><h1>খানা: </h1></div>
-        </div>
-
-        <div className="overflow-x-auto md:mx-10 mx-5 mt-10">
+        <div className="overflow-x-auto w-72 md:w-full  mt-10">
           <table className="table w-full">
             {/* head*/}
             <thead>
@@ -81,6 +85,11 @@ const StudentDocument = () => {
               {/* row 1 */}
               <tr>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 
               </tr>
             </tbody>
@@ -89,13 +98,20 @@ const StudentDocument = () => {
 
         <div className="divider"></div> 
 
-        <div className="overflow-x-auto md:mx-10 mx-5">
+        <div className="overflow-x-auto   w-72 md:w-full">
           <table className="table w-full">
+            
 
             <tbody>
               {/* row 1 */}
               <tr>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                
               </tr>
             </tbody>
           </table>

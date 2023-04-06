@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import { MdDeleteForever } from 'react-icons/md';
+import { FcDeleteDatabase } from 'react-icons/fc';
 
 const StudentList = () => {
+  const handleStudentInfoDelete=()=>{
+    
+  }
   return (
     <div className='md:mx-40 mx-5 mt-5'>
       <div className='flex justify-center mb-5'>
@@ -28,8 +33,34 @@ const StudentList = () => {
           </ul>
         </div>
       </div>
-      <h1>StudentList
-        </h1>
+      
+
+      <div className='bg-green-200 py-10 px-5 rounded'>
+        <div className="overflow-x-auto">
+          <table className="table w-full">
+            {/* head*/}
+            <thead>
+              <tr>
+                <th></th>
+                <th>নাম</th>
+                <th>শ্রেনি</th>
+                <th>রোল</th>
+                <th>ডিলিট</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* row 1 */}
+              <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Blue</td>
+                <td onClick={handleStudentInfoDelete}><FcDeleteDatabase size="28"></FcDeleteDatabase></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
