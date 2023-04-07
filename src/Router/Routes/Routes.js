@@ -8,7 +8,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import MainDashboard from "../../Layout/MainDashboard";
 import StudentMoneyDetails from "../../Pages/StudentMoneyDetails/StudentMoneyDetails";
 import StudentDocument from "../../Pages/StudentMoneyDetails/StudentDocument";
-import StudentList from "../../Pages/StudentMoneyDetails/StudentList";
+import StudentDataList from "../../Pages/StudentMoneyDetails/StudentDataList";
 
 
 const router = createBrowserRouter([
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/studentList",
-        element: <StudentList></StudentList>
+        element: <StudentDataList></StudentDataList>
       },
       {
         path: "/dashboard/signup",

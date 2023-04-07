@@ -1,12 +1,68 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import { MdDeleteForever } from 'react-icons/md';
 import { FcDeleteDatabase } from 'react-icons/fc';
+import Loader from '../../Shared/Loader/Loader';
+import { AuthContext } from '../../Contexts/AuthProvider';
+import { useQuery } from 'react-query';
+import DeleteStudentInfo from './DeleteStudentInfo';
+import { toast } from 'react-hot-toast';
 
-const StudentList = () => {
-  const handleStudentInfoDelete=()=>{
-    
+const StudentDataList = () => {
+  const [loading, setLoading] = useState(true)
+  const { user } = useContext(AuthContext)
+
+  const deleteInfo = (id) => {
+    const proceed = window.confirm('Are you sure you want to delete this Student Course?');
+
+    if (proceed) {
+      fetch(`https://duk-madrasha-server-orcin.vercel.app/studentMoney2/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: `bearer ${user.email}`
+        },
+        mode: 'cors'
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            toast.success('মুছে ফেলা হয়েছে');
+          }
+        })
+    }
+
+
   }
+
+  const { data: studentList = [] } = useQuery({
+    queryKey: ['studentMoney2'],
+    queryFn: () => fetch('https://duk-madrasha-server-orcin.vercel.app/studentMoney2')
+      .then(res => res.json())
+
+  })
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(
+  //       `https://smart-university-protal-server-coral.vercel.app/teacherDetails`
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         data.map((s) => {
+  //           setTeacherDetails(s);
+  //         });
+
+  //         setLoading(false);
+  //       });
+  //   }
+  // }, [user]);
+  // if (studentList){
+  //   setLoading(false)
+  // }
+  // if (loading) {
+  //   return <Loader></Loader>;
+  // }
   return (
     <div className='md:mx-40 mx-5 mt-5'>
       <div className='bg-slate-700 text-center text-white mb-2 py-3 rounded text-2xl  '>
@@ -36,7 +92,7 @@ const StudentList = () => {
           </ul>
         </div>
       </div>
-      
+
 
       <div className='bg-green-200 py-10 px-5 rounded'>
         <div className="overflow-x-auto">
@@ -53,13 +109,19 @@ const StudentList = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-                <td onClick={handleStudentInfoDelete}><FcDeleteDatabase size="28"></FcDeleteDatabase></td>
-              </tr>
+              {
+                studentList?.map((allStudent, index) =>
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td>{allStudent.name}</td>
+                    <td>{allStudent.classNumber}</td>
+                    <td >{allStudent.classRoll}</td>
+                    <td onClick={() => deleteInfo(allStudent._id)}><FcDeleteDatabase size="28"></FcDeleteDatabase>
+                    </td>
+                  </tr>
+                )
+              }
+
             </tbody>
           </table>
         </div>
@@ -68,4 +130,4 @@ const StudentList = () => {
   );
 };
 
-export default StudentList;
+export default StudentDataList;

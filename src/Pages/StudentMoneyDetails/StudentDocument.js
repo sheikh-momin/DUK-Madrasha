@@ -24,8 +24,9 @@ const StudentDocument = () => {
 
   const { data:studentDocument=[] }= useQuery({
     queryKey: ['studentMoney','searchBtn'],
-    queryFn: () => fetch(`https://duk-madrasha-server-orcin.vercel.app/studentMoney/${searchBtn}`)
+    queryFn: () => fetch(`https://duk-madrasha-server-orcin.vercel.app/studentMoney2/${searchBtn}`)
                     .then(res => res.json())
+                    
   })
 
   
@@ -40,9 +41,11 @@ const StudentDocument = () => {
   //   }
 
   // }, [user])
-  console.log(studentDocument);
-  console.log(searchBtn);
-
+  // console.log(studentDocument);
+  // console.log(searchBtn);
+  // if(searchBtn){
+  //   setLoading(false)
+  // }
   // if (loading) {
   //   return <Loader></Loader>;
   // }

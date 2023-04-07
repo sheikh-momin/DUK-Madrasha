@@ -56,7 +56,7 @@ const StudentMoneyDetails = () => {
     exm :exm,
     }
 
-    fetch('https://duk-madrasha-server-orcin.vercel.app/studentMoney', {
+    fetch('https://duk-madrasha-server-orcin.vercel.app/studentMoney2', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
